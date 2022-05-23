@@ -1,6 +1,6 @@
 # Assignment 3: Incarceration
 
-Link to your final GitHub pages site here: https://info-201a-sp22.github.io/a3-starter/index.html (change the link to for your GitHub pages site)
+Link to your final GitHub pages site here: https://info-201a-sp22.github.io/a3-incarceration-kaimouren/ (change the link to for your GitHub pages site)
 
 America is the country with the greatest number of people incarcerated in the world, and of all Americans, people of color, especially Black people, are incarcerated at disproportionately high rates — the result of both historical and present-day racism. But just how much have prison and jail populations increased over time, and how do race and gender figure into these trends? How, if at all, can a deeper analysis of these trends help identify possible solutions and areas where the public needs to pay more attention?
 
