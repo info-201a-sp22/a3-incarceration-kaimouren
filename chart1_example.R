@@ -1,6 +1,7 @@
 library(ggplot2)
 library(dplyr)
-
+library(stringr)
+library(reshape2)
 pris_pop <- read.csv("https://github.com/melaniewalsh/Neat-Datasets/blob/main/us-prison-pop.csv?raw=true",stringsAsFactors = FALSE)
 
 plot_seven_years <- pris_pop %>%
@@ -9,22 +10,26 @@ plot_seven_years <- pris_pop %>%
   summarize(all_pop_pris = sum(total_prison_pop,na.rm = TRUE),
             all_black_prison = sum(black_prison_pop,na.rm = TRUE),
             all_white_prison = sum(white_prison_pop,na.rm = TRUE)) %>%
-  mutate(ratio_black_total = all_black_prison/all_pop_pris,
-         rati0_white_total = all_white_prison/all_pop_pris)
-  
+  mutate(blackPrisPopRace = all_black_prison/all_pop_pris,
+         whitekPrisPopRace = all_white_prison/all_pop_pris)
+
+plot_seven_years <- plot_seven_years %>%
+  select(year, blackPrisPopRace, whitekPrisPopRace)
+
+df_long <- melt(plot_seven_years, id.var = "year")
+
+df_long <- df_long %>% rename(race = variable,pop_ratio = value)
+
 
 x_labels <- c(
   "1970","1977","1984", "1991", "1998", "2005", "2012"
   )
 
-ggplot(
-  plot_seven_years,
-  aes(x = year, y = ratio_black_total/rati0_white_total)
-) +
-  geom_line(color = "red") +
+ggplot(df_long,) +
+  geom_line(aes(x = year,y = pop_ratio, color = race)) +
   scale_x_continuous(breaks = seq(1970, 2016, by = 7), labels = x_labels) +
   labs(
-    title = "Ratio of blacks to whites as a percentage of total prison population",
-    x = "Rate",
-    y = "Time(year)"
+    title = "Prison Population Ratio by Race",
+    x = "Year",
+    y = "Ratio"
   )

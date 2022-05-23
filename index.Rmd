@@ -5,67 +5,61 @@ output: html_document
 
 ### Introduction
 
-An introduction of the problem domain and a description of the variable(s) you are choosing to analyze (and why!)
+The impact of racial discrimination in the United States is in every aspect, especially in the prison system. Discrimination against people of color in judicial sentencing has resulted in serious inequitable outcomes for communities of color. Through data visualization, we can more visually see how this inequality has changed from the past to the present and the magnitude of the problem now. This can help the justice system now react to itself and be more fair in sentencing
+
+In order to better analyze the problem of racial discrimination in the current prison system, and after studying the tables from the Vera Institution, I came up with the following questions:
+
+-How the ratio of blacks to the total prison population has changed every 7 years from 1984 to 2018? -What is the difference between male an female entering prison every 7 years in King County from 1970 to 2018? Does the prison system also discriminate on the basis of gender? -What is the percentage of people of color in prison in each state in the most recent year
+
+By examining the above questions, we can understand the changing impact of racial discrimination in the prison system and learn where there should be more focus on addressing the impact of discrimination on the administration of justice. To answer these question, I choose to analyze following variables:
+
+Year: In order to study changes in the impact of racial discrimination on the justice system, the year is the most intuitive data.
+
+State: This variable helps me to examine how the proportion of people of color incarcerated in prisons geographically.
+
+Gender: In order to study whether there is gender discrimination in the prison system, data on gender must be the most intuitive.
+
+Race: This variable describes what races are in prisons and jails. In order to study whether there is racial discrimination in the prison system, data on race is critical.
+
+Total Prison Population/Total Jail Population: This variable shows how many people are in prison and jail and can help me explain the distribution of the population by race or gender.
 
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
+```{r echo = FALSE, message = FALSE, code = readLines("summary.R")}
+```
 
-These will likely be calculated using your DPLYR skills, answering questions such as: 
+By tabulating the prison and jail population of the Vera Institution, I found that there are years where data for some variables are missing, so below, for better analysis of the data, I will choose to use the most recent year where data for that variable is complete.
 
-- What is the average value of my variable across all the counties (in the current year)?
-- Where is my variable the highest / lowest?
-- How much has my variable change over the last N years?
+In 2013, the total prison population in the United States was `r summary$total_pop`, `r summary$total_pris_black` of which were black. The state with the highest total prison black population was Los Angeles County with `r summary$pris_county_numb`, however the state with the highest total black prison popuilation was Texas with `r summary$pris_state_number`. Moreover, before 2018, the number of blacks in prison was `r summary$avg_ratio_black` times the number of whites, yet the number of blacks in prison is similar to or even a little less than the number of whites, with an average of `r summary$blackJailPop` and `r summary$whiteJailPop` per year, respectively.
 
-Feel free to calculate and report values that you find relevant. Again, remember that the purpose is to think about how these measure of incarceration vary by race.
+Meanwhile, from 1970 to 2018, an average of `r summary$maleJailPop` men were in jail each year, while an average of only `r summary$femaleJailPop` woman was in jail each year. This shows that the prison system does not only have a problem with racial discrimination, but also with gender discrimination.
 
 ### The Dataset
 
-Who collected the data?  
-How was the data collected or generated?  
-Why was the data collected?  
-How many observations (rows) are in your data?  
-How many features (columns) are in the data?  
-What, if any, ethical questions or questions of power do you need to consider when working with this data?  
-What are possible limitations or problems with this data?   (at least 200 words)
+Who collected the data?\
+How was the data collected or generated?\
+Why was the data collected?\
+There are 153811 observations in the dataset of both prison and jail population per county/state. And there are 36 features in the dataset of prison population per county/state and There are 28 features in the dataset of jail population per county/state.
 
+The biggest limitation of this dataset is that some years are missing data. In the table for the prison population, only the population numbers available for 1970 to 1977. The jail population numbers are missing. So, when I wanted to analyze the questions related to jail population counts, I had to ignore those years. Had these data not been true, the conclusions I reached would have been more complete. At the same time, the tabular data for the prison population are more severely missing. The most recent year with more complete data is 2013, five years removed from the final year. It is possible that the U.S. prison system will get better in those five years, or it is possible that the discrimination problem will get worse. The results obtained using the 2013 data are somewhat outdated now. Moreover, the gender breakdown in these tables is only male and female and does not take the LGBTQ community into account very well. It is possible that until the 21st century, little attention was paid to minorities, but with the data since then I think it is important to take minorities into account when counting the total population of each gender in prisons.
 
 ### Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
-
-The first chart that you will create and include will show the trend over time of your variable/topic. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - This may mean showing the same measure for different locations or different racial groups. Think carefully about a meaningful comparison of locations (e.g., the top 10 counties in a state, top 10 states, etc.)
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart1_example.R")}
+```{r, echo = FALSE, code = readLines("chart1_example.R")}
 ```
+
+This chart shows the change in the ratio of black to white population in prisons over time in the US. Observations reveal that the percentage of blacks in U.S. prisons was higher than that of whites until 2012. Until 1984, the black population of the U.S. prison population was above 40%. Although the percentage of blacks in prison has been around 40 percent since 2005, the percentage of whites has gradually increased and eventually surpassed the percentage of blacks. This would suggest that racial discrimination does exist in the U.S. prison system, but it has abated over recent years.
 
 ### Variable Comparison Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+```{r, echo = FALSE, message = FALSE, code = readLines("chart2_example.R"), fig.width = 10}
+```
 
-The second chart that you will create and include will show how two different (continuous) variables are related to one another. Again, think carefully about what such a comparison means and what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- If you choose to add a color encoding (not required), you need a legend for your different color and a clear legend title
+This is a chart on the distribution of the number of males and females in jail. The discrimination in jail may not only be racial but also gender. To make the table more concise and intuitive, I chose to group every four years and come up with data for each gender. By looking at the chart, it is clear that the number of males in prison is much higher than the number of females. Unlike usual, men are more likely to be in jail than women. There is indeed gender discrimination in the prison system and it seems that men are at a disadvantage.
 
 ### Map
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+```{r, echo = FALSE, message = FALSE, code = readLines("map_example.R")}
+```
 
-The last chart that you will create and include will show how a variable is distributed geographically. Again, think carefully about what such a comparison means and what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Your map needs a title
-- Your color scale needs a legend with a clear label
-- Use a map based coordinate system to set the aspect ratio of your map
-
+This map shows the percentage of blacks in the jail population by state in 2018. By looking at it, it's obvious that most states have a black population of less than 40%. Also the ratio of Black people in the jail population in Western America is lower compared to the Eastern United States. There are still many places in the central and southern United States where the ratio is close to or even above 40%. Therefore, jails in the central and southern regions need to focus more on addressing racial discrimination in the prison system.
